@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
 	{
 		minmax = std::minmax_element(vec.cbegin(), vec.cend());
 	}
-	stopwatch.stop(min, max);
+	stopwatch.stop(*minmax.first, *minmax.second);
 
 
 	return 0;
