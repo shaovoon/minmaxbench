@@ -31,7 +31,7 @@ Clang++ 6.0.0, -O3
  std minmax_element:  514ms, result:1,1000000
 ```
 
-G++ 6.0.0, -O3
+G++ 7.4.0, -O3
 ```
          manual min:  801ms, result:1
             std min:  810ms, result:1
