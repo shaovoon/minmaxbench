@@ -6,6 +6,7 @@
 #include <chrono>
 #include <algorithm>
 #include <random>
+#include <execution>
 
 class timer
 {
@@ -21,14 +22,14 @@ public:
 		auto end = std::chrono::high_resolution_clock::now();
 		auto dur = end - begin;
 		auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
-		std::cout << std::setw(19) << text << ":" << std::setw(5) << ms << "ms" << ", result:" << result << std::endl;
+		std::cout << std::setw(22) << text << ":" << std::setw(5) << ms << "ms" << ", result:" << result << std::endl;
 	}
 	void stop(uint64_t min, uint64_t max)
 	{
 		auto end = std::chrono::high_resolution_clock::now();
 		auto dur = end - begin;
 		auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(dur).count();
-		std::cout << std::setw(19) << text << ":" << std::setw(5) << ms << "ms" << ", result:" << min << "," << max << std::endl;
+		std::cout << std::setw(22) << text << ":" << std::setw(5) << ms << "ms" << ", result:" << min << "," << max << std::endl;
 	}
 
 private:
@@ -81,6 +82,15 @@ int main(int argc, char *argv[])
 	}
 	stopwatch.stop(min);
 
+	stopwatch.start("std par min_element");
+	min = vec[0];
+	for (size_t k = 0; k < MAX_LOOP; ++k)
+	{
+		min = vec[0];
+		min = *std::min_element(std::execution::par, vec.cbegin(), vec.cend());
+	}
+	stopwatch.stop(min);
+
 	std::cout << std::endl;
 
 	stopwatch.start("manual max");
@@ -112,6 +122,15 @@ int main(int argc, char *argv[])
 	{
 		max = vec[0];
 		max = *std::max_element(vec.cbegin(), vec.cend());
+	}
+	stopwatch.stop(max);
+
+	stopwatch.start("std par max_element");
+	max = vec[0];
+	for (size_t k = 0; k < MAX_LOOP; ++k)
+	{
+		max = vec[0];
+		max = *std::max_element(std::execution::par, vec.cbegin(), vec.cend());
 	}
 	stopwatch.stop(max);
 
@@ -152,6 +171,14 @@ int main(int argc, char *argv[])
 		minmax = std::minmax_element(vec.cbegin(), vec.cend());
 	}
 	stopwatch.stop(*minmax.first, *minmax.second);
+
+	stopwatch.start("std par minmax_element");
+	std::pair<std::vector<int_type>::const_iterator, std::vector<int_type>::const_iterator> minmax2;
+	for (size_t k = 0; k < MAX_LOOP; ++k)
+	{
+		minmax2 = std::minmax_element(std::execution::par, vec.cbegin(), vec.cend());
+	}
+	stopwatch.stop(*minmax2.first, *minmax2.second);
 
 
 	return 0;
