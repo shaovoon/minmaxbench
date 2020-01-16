@@ -3,20 +3,17 @@ Benchmark of singular min max and iterator versions
 
 VC++ update 16.4, /Ox
 ```
-            manual min:  592ms, result:1
-               std min:  630ms, result:1
-       std min_element: 1889ms, result:1
-   std par min_element: 1901ms, result:1
+         manual min:  592ms, result:1
+            std min:  630ms, result:1
+    std min_element: 1889ms, result:1
 
-            manual max:  832ms, result:1000000
-               std max:  585ms, result:1000000
-       std max_element: 1891ms, result:1000000
-   std par max_element: 1883ms, result:1000000
+         manual max:  832ms, result:1000000
+            std max:  585ms, result:1000000
+    std max_element: 1891ms, result:1000000
 
-        manual min max:  816ms, result:1,1000000
-         std min & max:  762ms, result:1,1000000
-    std minmax_element: 2143ms, result:1,1000000
-std par minmax_element: 2034ms, result:1,1000000
+     manual min max:  816ms, result:1,1000000
+      std min & max:  762ms, result:1,1000000
+ std minmax_element: 2143ms, result:1,1000000
 ```
 
 Clang++ 6.0.0, -O3
