@@ -1,6 +1,8 @@
 # minmaxbench
 Benchmark of singular min max and iterator versions
 
+[CodeProject Article](https://www.codeproject.com/Tips/5256748/Cplusplus17-Benchmark-of-Singular-Min-Max-and-Iter)
+
 VC++ update 16.4, /Ox
 ```
          manual min:  592ms, result:1
